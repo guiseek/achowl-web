@@ -1,0 +1,64 @@
+<div class="sign-container">
+  <form [formGroup]="form" novalidate (ngSubmit)="onSignUp()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Cadastro</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <mat-form-field class="col full-width" appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="firstname" required>
+            <mat-error>Obrigatório</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col full-width" appearance="outline">
+            <mat-label>Sobrenome</mat-label>
+            <input matInput formControlName="lastname" required>
+            <mat-error>Obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" required>
+              <mat-error>Endereço inválido</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row" [formGroup]="pass">
+          <mat-form-field class="col full-width" appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input type="password" matInput formControlName="password" required>
+            <mat-error>Obrigatório</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col full-width" appearance="outline">
+            <mat-label>Confirmação</mat-label>
+            <input type="password" matInput formControlName="confirmPassword" required>
+            <mat-error>Obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <mat-error *ngIf="(password.valid && confirmPassword.valid) && pass.invalid">
+          Não confere
+        </mat-error>
+        <!-- <div [formGroup]="roles">
+          <mat-checkbox formControlName="subscriber">Usuário do aplicativo</mat-checkbox>
+          <mat-checkbox formControlName="editor">Editor</mat-checkbox>
+          <mat-checkbox formControlName="admin">Administrador</mat-checkbox>
+        </div> -->
+        <div [formGroup]="types">
+          <mat-checkbox formControlName="customer">Consumidor</mat-checkbox>
+          <mat-checkbox formControlName="provider">Prestador</mat-checkbox>
+          <mat-checkbox formControlName="place">Proprietário de local</mat-checkbox>
+          <mat-checkbox formControlName="musician">Músico</mat-checkbox>
+        </div>
+        <!-- <pre>{{form.value|json}}</pre> -->
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>
+          Criar conta
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

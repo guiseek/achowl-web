@@ -1,0 +1,11 @@
+<form [formGroup]="parentForm" *ngIf="musician$ | async as musician">
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>{{musician.name}}</mat-label>
+    <mat-select formControlName="instrument">
+      <mat-option>- Qual instrumento -</mat-option>
+      <mat-option *ngFor="let i of instruments" [value]="i.value">
+        {{i.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

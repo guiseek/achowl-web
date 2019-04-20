@@ -1,0 +1,20 @@
+export const INSTRUMENTS: object = {
+  ACCORDION: 'Acordeon',
+  BASS: 'Baixo',
+  CELLO: 'Violoncelo',
+  CLARINET: 'Clarinete',
+  DRUMS: 'Bateria',
+  ELETRICGUITAR: 'Guitarra',
+  FLUTE: 'Flauta',
+  GUITAR: 'Violão',
+  HARMONICA: 'Gaita',
+  HARP: 'Harpa',
+  KEYBOARD: 'Teclado',
+  PERCUSSION: 'Percussão',
+  PIANO: 'Piano',
+  SAXOPHONE: 'Saxofone',
+  TRUMPET: 'Trompete',
+  VIOLIN: 'Violino',
+  XYLOPHONE: 'Xilofone',
+  VOCALIST: 'Vocalista'
+}

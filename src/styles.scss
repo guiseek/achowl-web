@@ -1,0 +1,214 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.mat-toolbar.mat-secondary {
+  opacity: .8;
+  top: 64px;
+  &>.mat-fab {
+    top: 50%;
+  }
+}
+.toolbar-btn-icon {
+  padding: 0 14px;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  margin: 20px;
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.full-width {
+  width: 100%;
+  max-width: 100%;
+}
+.p-1 {
+  padding: 1rem;
+}
+.mv-1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.mb-1 {
+  margin-bottom: 1rem;
+}
+.mb-20px {
+  margin-bottom: 20px;
+}
+.text-center {
+  text-align: center;
+}
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+.content-end {
+  justify-content: flex-end;
+}
+.flex {
+  display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-space-between {
+  justify-content: space-between;
+}
+.flex-space-around {
+  justify-content: space-around;
+}
+.justify-center {
+  display: flex;
+  justify-content: center;
+}
+.flex-align-items {
+  align-items: center;
+}
+.flex-align-items-base {
+  align-items: baseline;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+.col.half {
+  max-width: 50%;
+}
+.col.w-1 { max-width: 10%; }
+.col.w-2 { max-width: 20%; }
+.col.w-3 { max-width: 30%; }
+.col.w-4 { max-width: 40%; }
+.col.w-5 { max-width: 50%; }
+.col.w-6 { max-width: 60%; }
+.col.w-7 { max-width: 70%; }
+.col.w-8 { max-width: 80%; }
+.col.w-9 { max-width: 90%; }
+
+.col:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+  .col {
+    margin-right: 0;
+  }
+  .col.w-1 { max-width: 100%; }
+  .col.w-2 { max-width: 100%; }
+  .col.w-3 { max-width: 100%; }
+  .col.w-4 { max-width: 100%; }
+  .col.w-5 { max-width: 100%; }
+  .col.w-6 { max-width: 100%; }
+  .col.w-7 { max-width: 100%; }
+  .col.w-8 { max-width: 100%; }
+  .col.w-9 { max-width: 100%; }
+}
+mat-card.custom {
+  padding: 0px;
+  mat-card-title {
+    margin-top: 12px;
+  }
+  &>.content,.mat-card-content {
+    padding: 16px;
+  }
+  &>.mat-card-actions:last-child {
+    padding: 16px;
+    margin: 0;
+  }
+}
+mat-card-header {
+  div[mat-card-avatar] {
+    background-position: -12px -12px;
+    width: 75px;
+    height: 75px;
+    background-repeat: no-repeat;
+    border-radius: 0;
+    background-size: cover;
+    &.place {
+      background-image: url('assets/svg-icons/place-circle.svg');
+    }
+    &.music {
+      background-image: url('assets/svg-icons/cloud-music-circle.svg');
+    }
+    &.tools {
+      background-image: url('assets/svg-icons/tools-circle.svg');
+    }
+    &.photographer {
+      background-image: url('assets/svg-icons/photographer-circle.svg');
+    }
+    &.filming {
+      background-image: url('assets/svg-icons/filming-circle.svg');
+    }
+  }
+}
+@mixin action-dialog {
+  .mat-dialog-container {
+    padding: 0;
+    .mat-dialog-title {
+      color: #fff;
+      padding: 24px;
+      display: flex;
+      &>.mat-icon {
+        margin-right: 12px;
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+      }
+      &>span {
+        font-size: 24px;
+        line-height: 36px;
+      }
+    }
+    .mat-dialog-content {
+      padding: 0 24px;
+      margin: 0;
+      // overflow: initial;
+      // max-height: 70vh;
+    }
+    .mat-dialog-actions {
+      margin: 0;
+      padding: 2px 8px;
+    }
+  }
+}
+.info-dialog {
+  @include action-dialog();
+  .mat-dialog-container .mat-dialog-title {
+    background: #039be5;
+  }
+}
+.remove-dialog {
+  @include action-dialog();
+  .mat-dialog-container .mat-dialog-title {
+    background: #ff5252;
+  }
+}
+.warning-dialog {
+  @include action-dialog();
+  .mat-dialog-container .mat-dialog-title {
+    background: #FF9800;
+  }
+}

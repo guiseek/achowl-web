@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  // height: calc(100% - 64px);
+}
+.switch-band {
+  max-width: 160px;
+  margin-left: 20px;
+  margin-right: 60px;
+}
+.mat-select-panel {
+  font-size: 16px;
+}

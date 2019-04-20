@@ -1,0 +1,25 @@
+<form [formGroup]="parentForm">
+  <div class="row flex-align-items-base">
+    <mat-form-field class="col w-4" appearance="outline">
+      <mat-label>Nome artístico</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error>Obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col w-3" appearance="outline">
+      <mat-label>Telefone</mat-label>
+      <input matInput formControlName="phone" mask="00 000000009">
+      <mat-error>Número inválido</mat-error>
+    </mat-form-field>
+    <div class="col w-3 justify-center">
+      <mat-slide-toggle formControlName="vocalist">É vocalista?</mat-slide-toggle>
+    </div>
+  </div>
+  <div class="row">
+    <mat-form-field class="col full-width" appearance="outline">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput #desc formControlName="description" required></textarea>
+      <mat-hint align="end">{{desc.value?.length || 0}}/1000</mat-hint>
+      <mat-error>Obrigatório</mat-error>
+    </mat-form-field>
+  </div>
+</form>

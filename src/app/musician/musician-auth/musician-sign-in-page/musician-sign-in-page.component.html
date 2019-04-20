@@ -1,0 +1,15 @@
+<form [formGroup]="form" novalidate (ngSubmit)="onSignIn()">
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" required>
+    <mat-error>Endereço inválido</mat-error>
+  </mat-form-field>
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Senha</mat-label>
+    <input type="password" matInput formControlName="password" required>
+    <mat-error>Obrigatório</mat-error>
+  </mat-form-field>
+  <div class="mb-1 flex-end">
+    <button mat-flat-button color="primary">Entrar</button>
+  </div>
+</form>

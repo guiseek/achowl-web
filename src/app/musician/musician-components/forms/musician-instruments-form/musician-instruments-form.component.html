@@ -1,0 +1,8 @@
+<form [formGroup]="parentForm">
+  <mat-list>
+    <mat-list-item *ngFor="let i of keys">
+      <p matLine>{{instruments[i]}}</p>
+      <mat-checkbox [formControlName]="i"></mat-checkbox>
+    </mat-list-item>
+  </mat-list>
+</form>
