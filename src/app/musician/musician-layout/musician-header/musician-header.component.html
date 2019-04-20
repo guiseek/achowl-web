@@ -1,0 +1,23 @@
+<span routerLink="/musician">Músico</span>
+<span class="spacer"></span>
+<button mat-button [matMenuTriggerFor]="menu" *ngIf="musician$ | async as musician">
+  <mat-icon>account_circle</mat-icon>
+  <span>
+    {{musician.name}}
+  </span>
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu" xPosition="before" yPosition="below">
+  <!-- <button mat-menu-item routerLink="/settings">
+    <mat-icon>settings</mat-icon>
+    <span>Configurações</span>
+  </button> -->
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="signOut()">
+    <mat-icon>exit_to_app</mat-icon>
+    Sair do sistema
+  </button>
+</mat-menu>
+
+<!-- <a mat-button routerLink="/cadastro">Cadastre-se</a>
+<a mat-button routerLink="/login">Entrar</a> -->

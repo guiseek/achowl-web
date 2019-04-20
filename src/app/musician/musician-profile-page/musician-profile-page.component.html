@@ -1,0 +1,72 @@
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+</ng-template>
+<mat-toolbar color="primary" class="mat-secondary mat-elevation-z8">
+  <!-- <span>Perfil profissional</span> -->
+  <button mat-raised-button (click)="onSubmit()" color="accent" matTooltip="Cadastrar album">
+    <mat-icon>album</mat-icon>
+    Cadastrar album
+  </button>
+
+  <span class="spacer"></span>
+  <button mat-fab [disabled]="form.invalid" (click)="onSubmit()" matTooltip="Salvar">
+    <mat-icon>save</mat-icon>
+  </button>
+</mat-toolbar>
+<form [formGroup]="form" class="container" *ngIf="musician$ | async as musician; else loading">
+  <div class="row flex-1">
+    <div class="col w-6">
+      <mat-card class="custom mb-20px">
+        <mat-card-header>
+          <div mat-card-avatar class="music"></div>
+          <mat-card-title>Perfil de músico</mat-card-title>
+          <mat-card-subtitle>Atualizado em</mat-card-subtitle>
+        </mat-card-header>
+        <div class="content">
+          <owl-musician-profile-form [parentForm]="form"></owl-musician-profile-form>
+        </div>
+      </mat-card>
+      <mat-divider></mat-divider>
+      <mat-card class="custom">
+        <mat-card-header>
+          <div mat-card-avatar class="music"></div>
+          <mat-card-title>Repertório</mat-card-title>
+          <mat-card-subtitle>Atualizado em</mat-card-subtitle>
+        </mat-card-header>
+        <div class="content">
+          <!-- <pre>{{form.value|json}}</pre> -->
+        </div>
+      </mat-card>
+    </div>
+    <div class="col w-2">
+      <mat-card class="custom">
+        <mat-card-header>
+          <div mat-card-avatar class="music"></div>
+          <mat-card-title>Instrumentos</mat-card-title>
+          <mat-card-subtitle>Atualizado em</mat-card-subtitle>
+        </mat-card-header>
+        <div class="content">
+          <owl-musician-instruments-form [parentForm]="instruments"></owl-musician-instruments-form>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col w-2">
+      <mat-card class="custom">
+        <mat-card-header>
+          <div mat-card-avatar class="music"></div>
+          <mat-card-title>Gêneros</mat-card-title>
+          <mat-card-subtitle>Atualizado em</mat-card-subtitle>
+        </mat-card-header>
+        <div class="content">
+          <owl-musician-genres-form [parentForm]="genres"></owl-musician-genres-form>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <!-- </div> -->
+</form>
+<!-- <ng-template #loading>
+  <div class="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+</ng-template> -->

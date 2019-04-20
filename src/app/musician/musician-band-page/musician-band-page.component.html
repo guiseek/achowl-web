@@ -1,0 +1,50 @@
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+</ng-template>
+<mat-toolbar color="primary" class="mat-secondary mat-elevation-z8">
+  <span>Banda:</span>
+  <mat-select [compareWith]="checkCurrentBand" [formControl]="currentBand" (selectionChange)="switchBand($event)"
+    class="switch-band">
+    <mat-option value>Nova banda</mat-option>
+    <mat-option *ngFor="let band of bands$ | async" [value]="band">
+      {{band.name}}
+    </mat-option>
+  </mat-select>
+  <button mat-raised-button color="accent" matTooltip="Cadastrar album">
+    <mat-icon>album</mat-icon>
+    Cadastrar album
+  </button>
+
+  <span class="spacer"></span>
+  <!-- <button mat-fab [disabled]="form.invalid" matTooltip="Salvar">
+    <mat-icon>check</mat-icon>
+  </button> -->
+</mat-toolbar>
+<div class="container" *ngIf="band$ | async as band">
+  <div class="row flex-1">
+    <div class="col w-5">
+      <mat-card class="custom mb-20px">
+        <mat-card-header>
+          <div mat-card-avatar class="music"></div>
+          <mat-card-title>Membros</mat-card-title>
+          <mat-card-subtitle>Atualizado em</mat-card-subtitle>
+        </mat-card-header>
+        <div class="content">
+          <!-- <owl-musician-search (onSelect)="onSelect($event)"></owl-musician-search> -->
+          <button mat-flat-button color="primary" (click)="openMemberDialog(band)">
+            Adicionar membro
+          </button>
+          <!-- <owl-musician-profile-form [parentForm]="form"></owl-musician-profile-form> -->
+        </div>
+        <!-- <pre>{{band|json}}</pre> -->
+        <mat-list>
+          <owl-musician-band-member *ngFor="let m of band.musicians" [musician]="m"></owl-musician-band-member>
+        </mat-list>
+        <button mat-button (click)="openBandDialog(band)">
+          Abrir
+        </button>
+      </mat-card>
+
+    </div>
+  </div>
+</div>
