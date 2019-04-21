@@ -21,7 +21,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .spacer {
   flex: 1 1 auto;
 }
-
+button.mat-menu-item.icon-end {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .mat-icon {
+    margin: 0 0 0 16px;
+  }
+}
 .container {
   display: flex;
   flex: 1;

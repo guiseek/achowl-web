@@ -1,4 +1,24 @@
 <span routerLink="/">AchOWL</span>
 <span class="spacer"></span>
 <a mat-button routerLink="/cadastro">Cadastre-se</a>
-<a mat-button routerLink="/login">Entrar</a>
+<button mat-button [matMenuTriggerFor]="menu">
+  Entrar
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item disabled>
+    Acessar como
+  </button>
+  <button mat-menu-item class="icon-end" routerLink="/musico/auth/entrar">
+    <span>Músico</span>
+    <mat-icon>music_note</mat-icon>
+  </button>
+  <button mat-menu-item class="icon-end">
+    <span>Local</span>
+    <mat-icon>place</mat-icon>
+  </button>
+  <button mat-menu-item class="icon-end">
+    <span>Prestador</span>
+    <mat-icon>settings</mat-icon>
+  </button>
+</mat-menu>
