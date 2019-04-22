@@ -7,17 +7,17 @@ export class SnackService {
     duration: 5000,
     panelClass: null
   }
+  action: string = 'OK'
   panelClass: string
-  action: string
   constructor(
     private snack: MatSnackBar
   ) { }
-  open(message: string, cfg?) {
+  open(message: string, cfg:any = {}) {
     let { action, ...config } = cfg
     this.snack.open(
       message,
-      action ? action : 'OK',
-      config ? config : this.config
+      action ? action : this.action,
+      Object.assign(this.config, config)
     )
   }
 }

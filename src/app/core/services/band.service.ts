@@ -4,10 +4,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AFSQuery } from '../firebase/afs-query';
 import { Observable, combineLatest, of, BehaviorSubject } from 'rxjs';
 import { Band } from '../interfaces/band';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, merge, mergeMap, mergeMapTo, take } from 'rxjs/operators';
 import { Musician } from '../interfaces/musician';
 import { UserService } from './user.service';
 import { firestore } from 'firebase/app';
+import { MusicAlbum } from '../interfaces/music-album';
+import { MusicianService } from './musician.service';
 
 @Injectable()
 export class BandService extends FirestoreService {
@@ -24,11 +26,11 @@ export class BandService extends FirestoreService {
 
   constructor(
     public afs: AngularFirestore,
-    private user: UserService
+    private user: UserService,
+    private musician: MusicianService
   ) {
     super(afs)
     this.currentBand$ = this._currentBand$.asObservable();
-
     // this.band$ = this.auth.authState$.pipe(
     //   switchMap(auth => auth ? this.doc<User>(`${this.path}/${auth.uid}`) : of(null))
     // )
@@ -50,9 +52,41 @@ export class BandService extends FirestoreService {
       return err
     }
   }
+  saveRepertoire({id, repertoire}) {
+    console.log(id, repertoire)
+    const ref = this.afs.collection(this.path).doc(id)
+    return ref.update({
+      updated: firestore.Timestamp.now(),
+      repertoire
+    })
+    // return this.ref(`${this.path}/${id}`)
+    //   .update({
+    //     updated: firestore.Timestamp.now(),
+    //     repertoire: firestore.FieldValue.arrayUnion(repertoire)
+    //   })
+  }
   getBandRef(id: string) {
     return this.ref<Band>(`${this.path}/${id}`)
   }
+  async saveAlbum(album: MusicAlbum) {
+    album.updated = firestore.Timestamp.now()
+    if (!album.id) {
+      album.id = this.generatedId
+      album.created = firestore.Timestamp.now()
+    }
+    try {
+      return await this.set<MusicAlbum>(`albums`, album.id, album)
+    } catch (err) {
+      return err
+    }
+  }
+  getAlbumsByRef(ref: firebase.firestore.DocumentReference) {
+    const query = new AFSQuery()
+    query.where = [[`parentRef`, '==', ref]]
+    console.log(query)
+    return this.collection<MusicAlbum>('albums', query)
+  }
+
   getMusicianBands() {
     return this.user.user$.pipe(
       switchMap(user => {
@@ -67,34 +101,72 @@ export class BandService extends FirestoreService {
     query.where = [[`members.${uid}.active`, '==', true]]
     return this.collection<Band>(this.path, query)
   }
-  joinMembers(band$: Observable<any>) {
-    let band;
-    const joinKeys = {};
-
+  getMembers(band: Band) {
+    let members = []
+    return of([]).pipe(
+      switchMap(() => {
+        const mids = Array.from(
+          new Set(
+            Object.keys(band.members)
+          )
+        )
+        const musicianDocs = mids.map(m =>
+          this.afs.doc<Musician>(`musicians/${m}`).valueChanges()
+        )
+        return musicianDocs.length ? combineLatest(musicianDocs) : of([])
+      }),
+      map(arr => {
+        // console.log('arr: ', arr)
+        arr.forEach(v => (members[(<any>v).id] = v))
+        members = Object.keys(band.members).map(mid => {
+          let { name, phone, photo } = arr.find(m => m.id == mid)
+          return Object.assign(
+            band.members[mid],
+            { name, phone, photo }
+          )
+        })
+        console.log('arr: ', arr)
+        return members;
+        // return Object.keys(band.members).map(mid => {
+        //   let { name, phone, photo } = arr.find(m => m.id == mid)
+        //   return Object.assign(
+        //     band.members[mid],
+        //     { name, phone, photo }
+        //   )
+        // })
+        // return arr
+      })
+    )
+    // return members
+  }
+  joinMembers(band$: Observable<Band>) {
+    let band: Band
+    const joinKeys = {}
     return band$.pipe(
       switchMap(c => {
-        // Unique User IDs
         band = c;
         const uids = Array.from(new Set(
           Object.keys(c.members).map(v => v)
-        ));
-
-        // Firestore User Doc Reads
+        ))
         const userDocs = uids.map(u =>
-          this.afs.doc(`musicians/${u}`).valueChanges()
+          this.afs.doc<Musician>(`musicians/${u}`).valueChanges()
         );
-
         return userDocs.length ? combineLatest(userDocs) : of([]);
       }),
       map(arr => {
-        console.log('arr: ', arr)
-        arr.forEach(v => (joinKeys[(<any>v).id] = v));
-        band.musicians = Object.keys(band.members).map(v => {
-          console.log('joinKeys: ', joinKeys)
-          console.log('v: ', v)
-          return { ...band.members[v], member: joinKeys[v] };
-        });
-
+        // console.log('arr: ', arr)
+        arr.forEach(v => (joinKeys[(<any>v).id] = v))
+        band.musicians = Object.keys(band.members).map(mid => {
+          let { name, phone, photo } = arr.find(m => m.id == mid)
+          return Object.assign(
+            band.members[mid],
+            { name, phone, photo }
+          )
+        })
+        // band.musicians = Object.keys(band.members).map(v => {
+        //   return { ...band.members[v], member: joinKeys[v] };
+        // });
+        console.log('arr: ')
         return band;
       })
     );
@@ -131,7 +203,7 @@ export class BandService extends FirestoreService {
     return this.collection<Band>(this.path, query)
   }
   getBandById(id: string) {
-    return this.doc(`${this.path}/${id}`);
+    return this.doc<Band>(`${this.path}/${id}`);
   }
   findBands(text?: string): Observable<Band[]> {
     const query = new AFSQuery()

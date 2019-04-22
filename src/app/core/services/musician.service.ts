@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirestoreService } from '../firebase/firestore.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AFSQuery } from '../firebase/afs-query';
 import { Observable, BehaviorSubject, combineLatest, of } from 'rxjs';
 import { Musician } from '../interfaces/musician';
@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 export class MusicianService extends FirestoreService {
   private path: string = 'musicians'
   musician$: Observable<Musician>
+  musicianRef: AngularFirestoreDocument<Musician>
   public musician: BehaviorSubject<Musician> = new BehaviorSubject(null)
   constructor(
     public afs: AngularFirestore,
@@ -43,6 +44,12 @@ export class MusicianService extends FirestoreService {
   //     })
   //   )
   // }
+  getMyBands(mid) {
+    const query = new AFSQuery()
+    query.where = [['creator', '==', mid]]
+    return this.collection<Band>(this.path, query)
+
+  }
   saveMusician(musician: Musician) {
     return this.set<Musician>(this.path, musician.id, musician)
   }

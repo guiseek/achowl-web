@@ -1,11 +1,9 @@
 <h1 mat-dialog-title>
-  <mat-icon>info</mat-icon>
-  <span>Membros</span>
+  <mat-icon>person</mat-icon>
+  <span>{{data.name}}</span>
 </h1>
 <div mat-dialog-content>
-  <owl-musician-search (onSelect)="addMember($event)"></owl-musician-search>
-  <owl-musician-band-member-form *ngFor="let control of membersControls" [id]="control"
-    [parentForm]="members.controls[control]"></owl-musician-band-member-form>
+  <owl-musician-band-member-form [musician]="data" [parentForm]="form"></owl-musician-band-member-form>
 </div>
 <div mat-dialog-actions class="flex flex-space-between">
   <button mat-button (click)="onCancel()">Fechar</button>

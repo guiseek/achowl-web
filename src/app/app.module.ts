@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
+import { MusicianBandModule } from './musician/musician-band/musician-band.module';
 
 registerLocaleData(localeBr, 'pt-BR', localeBrExtra);
 
@@ -34,7 +35,8 @@ registerLocaleData(localeBr, 'pt-BR', localeBrExtra);
     AngularFireStorageModule,
     CoreModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MusicianBandModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent]

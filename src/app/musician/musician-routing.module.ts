@@ -4,7 +4,6 @@ import { MusicianLayoutComponent } from './musician-layout/musician-layout.compo
 import { MusicianGuard } from '../core/guards/musician.guard';
 import { MusicianDashboardPageComponent } from './musician-dashboard-page/musician-dashboard-page.component';
 import { MusicianProfilePageComponent } from './musician-profile-page/musician-profile-page.component';
-import { MusicianBandPageComponent } from './musician-band-page/musician-band-page.component';
 
 const routes: Routes = [{
   path: 'auth',
@@ -25,10 +24,10 @@ const routes: Routes = [{
     path: 'perfil',
     // canActivate: [],
     component: MusicianProfilePageComponent
-  }, {
-    path: 'band',
+    }, {
+    path: 'banda',
     // canActivate: [],
-    component: MusicianBandPageComponent
+    loadChildren: './musician-band/musician-band.module#MusicianBandModule'
   }]
 }];
 

@@ -1,0 +1,11 @@
+<owl-musician-band-header [currentBand]="currentBand" (onSwitchBand)="onSwitchBand($event)"></owl-musician-band-header>
+<div class="container" *ngIf="bands$ | async">
+  <div class="row flex-1">
+    <div class="col w-3">
+      <owl-musician-band-navigation></owl-musician-band-navigation>
+    </div>
+    <div class="col">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

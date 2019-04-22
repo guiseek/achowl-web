@@ -1,0 +1,16 @@
+  <form [formGroup]="parentForm">
+    <div cdkDropList formArrayName="repertoire" class="repertoire-list" (cdkDropListDropped)="drop($event)">
+      <div class="song-box" *ngFor="let item of repertoire.controls; let i=index" cdkDrag>
+        <button mat-icon-button color="warn" (click)="removeSong(i, item)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <mat-form-field class="full-width" [formGroupName]="i">
+          <owl-musician-repertoire-form [parts]="item" required>
+          </owl-musician-repertoire-form>
+          <mat-icon matSuffix matTooltip="Mover ordem" matTooltipPosition="above">
+            drag_handle
+          </mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>

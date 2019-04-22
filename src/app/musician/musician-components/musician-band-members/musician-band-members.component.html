@@ -1,0 +1,5 @@
+<h3 class="mat-h3">Membros</h3>
+<mat-divider class="mb-20px"></mat-divider>
+<mat-list *ngIf="members$ | async as members">
+  <owl-musician-band-member *ngFor="let m of members" [member]="m"></owl-musician-band-member>
+</mat-list>

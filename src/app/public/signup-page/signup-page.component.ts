@@ -15,9 +15,9 @@ import { User } from '../../core/interfaces/user';
 })
 export class SignupPageComponent implements OnInit {
   form = this.fb.group({
-    firstname: ['Gui', Validators.required],
-    lastname: ['Seek', Validators.required],
-    email: ['gguiseek@gmail.com', [Validators.required, Validators.email]],
+    firstname: [null, Validators.required],
+    lastname: [null, Validators.required],
+    email: [null, [Validators.required, Validators.email]],
     roles: this.fb.group({
       subscriber: [true],
       editor: [true],
@@ -30,11 +30,11 @@ export class SignupPageComponent implements OnInit {
       musician: [false],
     }, { validator: CheckboxSomeCheckedValidator }),
     pass: this.fb.group({
-      password: ['guiseek', Validators.compose([
+      password: [null, Validators.compose([
         Validators.minLength(6),
         Validators.required
       ])],
-      confirmPassword: ['guiseek', Validators.required],
+      confirmPassword: [null, Validators.required],
     }, { validator: PasswordValidator })
   })
   constructor(
@@ -69,11 +69,11 @@ export class SignupPageComponent implements OnInit {
     let { email, ...user } = data
     // let { password }
     try {
-      let auth = await this.auth.createAuth(email, pass.password)
-      if (auth.user) {
-        console.log('auth: ', auth)
+      let fuser = await this.auth.createAuth(email, pass.password)
+      if (fuser) {
+        console.log('fuser: ', fuser)
         const account: User = {
-          uid: auth.user.uid,
+          uid: fuser.uid,
           ...user
         }
         const profile = await this.user.createUser(account)

@@ -1,0 +1,23 @@
+<form [formGroup]="parentForm">
+  <div class="row">
+    <mat-form-field class="col w-8" appearance="outline">
+      <mat-label>Nome do album</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error>Obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col w-2" appearance="outline">
+      <mat-label>Ano</mat-label>
+      <input type="number" matInput formControlName="year" required>
+      <mat-error>Obrigatório</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="col full-width" appearance="outline">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput placeholder="Conte um pouco sobre a banda..." #desc formControlName="description"
+        required></textarea>
+      <mat-hint align="end">{{desc.value?.length || 0}}/1000</mat-hint>
+      <mat-error>Mínimo de 50 e máximo de 1000</mat-error>
+    </mat-form-field>
+  </div>
+</form>

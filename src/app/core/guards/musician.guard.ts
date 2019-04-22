@@ -23,10 +23,10 @@ export class MusicianGuard implements CanActivate {
       tap(isMusician => {
         console.log(isMusician)
         if (!isMusician) {
-          this.snackBar.open('Você não tem permissão.', 'Fechar', {
+          this.snackBar.open('Você não se cadastrou como músico.', 'Fechar', {
             duration: 5000
           })
-          // this.router.navigateByUrl('/musico/login')
+          this.router.navigateByUrl('/musico/auth/entrar')
         }
       })
     )

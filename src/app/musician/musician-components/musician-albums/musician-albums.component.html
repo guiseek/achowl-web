@@ -1,3 +1,10 @@
-<p>
-  musician-albums works!
-</p>
+<mat-list *ngFor="let album of albums$ | async">
+  <mat-list-item (click)="select(album)">
+    <h3 mat-line>{{album.name}}</h3>
+    <p mat-line>{{album.description}}</p>
+    <p mat-line>
+      {{album.year}}
+    </p>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>

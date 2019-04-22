@@ -13,7 +13,7 @@ export class MusicianBandDialogComponent implements OnInit {
   form = this.fb.group({
     id: [],
     name: [null, [Validators.required, Validators.maxLength(100)]],
-    description: [null, [Validators.minLength(50), Validators.maxLength(1000)]],
+    description: [null, Validators.maxLength(1000)],
     creator: [null, Validators.required],
     members: this.fb.group({})
   })

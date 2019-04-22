@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BandMember, Musician } from '../../../core';
+import { MusicianMember, INSTRUMENTS } from '../../../core';
 
 @Component({
   selector: 'owl-musician-band-member',
@@ -7,14 +7,14 @@ import { BandMember, Musician } from '../../../core';
   styleUrls: ['./musician-band-member.component.scss']
 })
 export class MusicianBandMemberComponent implements OnInit {
-  @Input() musician: {
-    active: boolean
-    instrument: string
-    member: Musician
-  }
+  @Input() member: MusicianMember
+  
   constructor() { }
 
   ngOnInit() {
+  }
+  get instrument() {
+    return INSTRUMENTS[this.member.instrument]
   }
 
 }

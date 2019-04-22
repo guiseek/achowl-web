@@ -1,3 +1,16 @@
-<p>
-  musician-album-dialog works!
-</p>
+<h1 mat-dialog-title>
+  <mat-icon>info</mat-icon>
+  <span>Album</span>
+</h1>
+<div mat-dialog-content>
+  <owl-musician-album-form [parentForm]="form"></owl-musician-album-form>
+  <!-- <button mat-flat-button class="full-width" (click)="searchMusician()">
+    Adicionar membro
+  </button> -->
+  <!-- <owl-musician-band-member-form *ngFor="let control of membersControls" [id]="control"
+    [parentForm]="members.controls[control]"></owl-musician-band-member-form> -->
+</div>
+<div mat-dialog-actions class="flex flex-space-between">
+  <button mat-button (click)="onCancel()">Fechar</button>
+  <button mat-stroked-button type="button" (click)="onSave()" [disabled]="form.invalid">Salvar</button>
+</div>

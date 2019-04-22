@@ -10,19 +10,19 @@ import { GENRES } from './../../../../core/constants/genres';
 })
 export class MusicianProfileFormComponent implements OnInit {
   @Input() parentForm: FormGroup
-  instrumentList = INSTRUMENTS
-  genreList = GENRES
+  // instrumentList = INSTRUMENTS
+  // genreList = GENRES
   ngOnInit() {
-    console.log(this.instrumentList)
+    // console.log(this.instrumentList)
     // console.log(this.instruments)
   }
-  get instrumentKeys() {
-    return Object.keys(INSTRUMENTS)
-  }
-  get genreKeys() {
-    return Object.keys(GENRES)
-  }
+  // get instrumentKeys() {
+  //   return Object.keys(INSTRUMENTS)
+  // }
+  // get genreKeys() {
+  //   return Object.keys(GENRES)
+  // }
 
-  get genres(): FormGroup { return this.parentForm.get('genres') as FormGroup }
-  get instruments(): FormGroup { return this.parentForm.get('instruments') as FormGroup }
+  // get genres(): FormGroup { return this.parentForm.get('genres') as FormGroup }
+  // get instruments(): FormGroup { return this.parentForm.get('instruments') as FormGroup }
 }

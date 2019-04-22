@@ -17,3 +17,10 @@ export interface Musician {
   created?: firestore.Timestamp
   updated?: firestore.Timestamp
 }
+export interface MusicianMember {
+  active: boolean
+  instrument: string
+  name: string
+  phone?: string
+  photo?: string
+}

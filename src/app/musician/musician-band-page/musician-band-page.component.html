@@ -10,41 +10,43 @@
       {{band.name}}
     </mat-option>
   </mat-select>
-  <button mat-raised-button color="accent" matTooltip="Cadastrar album">
+  <button mat-raised-button color="accent" matTooltip="Cadastrar album" (click)="openAlbumDialog({})">
     <mat-icon>album</mat-icon>
     Cadastrar album
   </button>
 
   <span class="spacer"></span>
-  <!-- <button mat-fab [disabled]="form.invalid" matTooltip="Salvar">
-    <mat-icon>check</mat-icon>
-  </button> -->
 </mat-toolbar>
 <div class="container" *ngIf="band$ | async as band">
+  <div class="row flex-1 mb-20px">
+    <mat-card class="custom action col mw-2" *ngFor="let card of cards" (click)="onCardClick(card.action, band)">
+      <mat-card-header>
+        <div mat-card-avatar [class]="card.icon"></div>
+        <mat-card-title>{{card.title}}</mat-card-title>
+        <mat-card-subtitle>{{card.subtitle}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
   <div class="row flex-1">
-    <div class="col w-5">
-      <mat-card class="custom mb-20px">
-        <mat-card-header>
-          <div mat-card-avatar class="music"></div>
-          <mat-card-title>Membros</mat-card-title>
-          <mat-card-subtitle>Atualizado em</mat-card-subtitle>
-        </mat-card-header>
-        <div class="content">
-          <!-- <owl-musician-search (onSelect)="onSelect($event)"></owl-musician-search> -->
-          <button mat-flat-button color="primary" (click)="openMemberDialog(band)">
-            Adicionar membro
-          </button>
-          <!-- <owl-musician-profile-form [parentForm]="form"></owl-musician-profile-form> -->
-        </div>
-        <!-- <pre>{{band|json}}</pre> -->
-        <mat-list>
-          <owl-musician-band-member *ngFor="let m of band.musicians" [musician]="m"></owl-musician-band-member>
-        </mat-list>
-        <button mat-button (click)="openBandDialog(band)">
-          Abrir
-        </button>
-      </mat-card>
-
-    </div>
+    <mat-card class="custom mb-20px col mw-2">
+      <mat-card-header>
+        <div mat-card-avatar class="people"></div>
+        <mat-card-title>{{band.name}}</mat-card-title>
+        <mat-card-subtitle>{{band.description}}</mat-card-subtitle>
+      </mat-card-header>
+      <owl-musician-repertoire [parentForm]="repertoireForm"></owl-musician-repertoire>
+    </mat-card>
+    <mat-card class="custom mb-20px col mw-2">
+      <owl-musician-band-member *ngFor="let m of band.musicians" [member]="m"></owl-musician-band-member>
+    </mat-card>
+    <mat-card class="custom mb-20px col mw-2">
+      <owl-musician-band-member *ngFor="let m of band.musicians" [member]="m"></owl-musician-band-member>
+    </mat-card>
+    <mat-card class="custom mb-20px col mw-2">
+      <owl-musician-albums [band]="band" (onSelect)="onSelectAlbum($event)"></owl-musician-albums>
+    </mat-card>
+    <mat-card class="custom mb-20px col mw-2">
+      <owl-musician-albums [band]="band" (onSelect)="onSelectAlbum($event)"></owl-musician-albums>
+    </mat-card>
   </div>
 </div>

@@ -13,56 +13,27 @@ import { INSTRUMENTS } from './../../../../core/constants/instruments';
   styleUrls: ['./musician-band-member-form.component.scss']
 })
 export class MusicianBandMemberFormComponent implements OnInit {
-  instrumentList = INSTRUMENTS
-  @Input() id: string
+  @Input() musician: Musician
   @Input() parentForm: FormControl
   instruments = []
-  musician$: Observable<Musician>
-  constructor(
-    private fb: FormBuilder,
-    private musician: MusicianService
-  ) { }
-  // get id() {
-  //   return this.parentForm.get('id')
-  // }
-  // get instrument() {
-  //   return this.parentForm.get('instrument')
-  // }
-  ngOnInit() {
-    if (this.id) {
-      this.musician$ = this.musician.getMusicianById(this.id)
-        .pipe(map(m => {
-          console.log('mus: ', m)
-          this.instruments = Object.keys(m.instruments)
-            .filter(i => !!m.instruments[i])
-            .map(i => {
-              return {
-                value: i,
-                viewValue: INSTRUMENTS[i]
-              }
-            })
-          return m
-        }))
-    }
-    console.log('parent: ', this.id, this.parentForm)
-    // this.parentForm
+  get active() {
+    return this.parentForm.get('active')
   }
-  // select(selected: MatAutocompleteSelectedEvent) {
-  //   let { option } = selected
-  //   console.log(option.value)
-  //   if (option.value) {
-  //     let { id, instruments } = option.value
-  //     this.id.patchValue(id)
-  //     console.log(instruments)
-  //     console.log(Object.keys(instruments))
-  //     this.instruments = Object.keys(instruments)
-  //       .filter(i => !!instruments[i])
-  //       .map(i => {
-  //         return {
-  //           value: i,
-  //           viewValue: INSTRUMENTS[i]
-  //         }
-  //       })
-  //   }
-  // }
+  get instrument() {
+    return this.parentForm.get('instrument')
+  }
+  ngOnInit() {
+    if (this.musician) {
+      console.log('ins: ', this.musician.instruments)
+      let { instruments } = this.musician
+      this.instruments = Object.keys(instruments)
+        .filter(i => !!instruments[i])
+        .map(i => {
+          return {
+            value: i,
+            viewValue: INSTRUMENTS[i]
+          }
+        })
+    }
+  }
 }

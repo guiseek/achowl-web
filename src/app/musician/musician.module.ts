@@ -19,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MusicianBandDialogComponent } from './musician-components/dialogs/musician-band-dialog/musician-band-dialog.component';
 import { MusicianSearchDialogComponent } from './musician-components/dialogs/musician-search-dialog/musician-search-dialog.component';
 import { MusicianBandMemberDialogComponent } from './musician-components/dialogs/musician-band-member-dialog/musician-band-member-dialog.component';
+import { MusicianAlbumDialogComponent } from './musician-components/dialogs/musician-album-dialog/musician-album-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +41,12 @@ import { MusicianBandMemberDialogComponent } from './musician-components/dialogs
     LayoutModule,
   ],
   entryComponents: [
-    // MusicianProfileDialogComponent,
+    MusicianProfileDialogComponent,
     MusicianBandDialogComponent,
     MusicianProfileFormComponent,
     MusicianSearchDialogComponent,
-    MusicianBandMemberDialogComponent
+    MusicianBandMemberDialogComponent,
+    MusicianAlbumDialogComponent
   ]
 })
 export class MusicianModule { }

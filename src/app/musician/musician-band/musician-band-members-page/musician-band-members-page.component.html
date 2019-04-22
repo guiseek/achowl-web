@@ -1,0 +1,65 @@
+<mat-card *ngIf="band$ | async as band">
+  <mat-card-header>
+    <mat-card-title>Membros da banda</mat-card-title>
+    <mat-card-subtitle>Após adicionar, será salvo automaticamente após 2 segundos</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row flex-space-between">
+      <div class="col w-4">
+        <owl-musician-band-member *ngFor="let member of band.musicians" [member]="member"></owl-musician-band-member>
+      </div>
+      <mat-divider style="padding-left: 20px; margin-right: 20px;" [vertical]="true"></mat-divider>
+      <div class="col w-6">
+        <owl-musician-search (onSelect)="onSelectMember($event)"></owl-musician-search>
+        <pre>{{band.members|json}}</pre>
+      </div>
+      <div>
+        <!-- <owl-musician-band-member-form></owl-musician-band-member-form> -->
+        <!-- <form [formGroup]="newSongForm">
+          <div class="row">
+            <mat-form-field appearance="outline" class="col full-width">
+              <mat-label>Artista</mat-label>
+              <input matInput formControlName="artist" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col full-width">
+              <mat-label>Música</mat-label>
+              <input matInput formControlName="song" required>
+            </mat-form-field>
+          </div>
+          <button mat-flat-button class="full-width" [disabled]="newSongForm.invalid" (click)="addSong()">
+            Adicionar
+          </button>
+        </form> -->
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- <div *ngIf="band$ | async as band" class="">
+  <mat-card class="custom mb-20px">
+    <mat-card-header *ngIf="creator$ | async as creator">
+      <mat-card-title>{{band.name}}</mat-card-title>
+      <mat-card-subtitle>
+        Criada por
+        <strong>{{creator.name}}</strong>
+        em
+        <strong>{{band.created.toDate() | date}}</strong>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col half">
+          <mat-list>
+            <owl-musician-band-member *ngFor="let member of band.musicians" [member]="member"></owl-musician-band-member>
+          </mat-list>
+        </div>
+        <div class="col half">
+          <owl-musician-band-member-form [id]="band.id" [parentForm]="form"></owl-musician-band-member-form>
+        </div>
+      </div>      
+    </mat-card-content>
+    <mat-card-content>
+      <pre>{{band|json}}</pre>
+    </mat-card-content>
+  </mat-card>
+</div> -->

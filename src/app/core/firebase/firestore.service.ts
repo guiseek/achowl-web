@@ -55,7 +55,9 @@ export class FirestoreService {
   protected delete(path: string, id: string) {
     return this.afs.doc(`${path}/${id}`).delete();
   }
-
+  protected create<T>(path: string, data: any) {
+    return this.afs.collection<T>(path).add(data)
+  }
   protected async deleteCol(path: string) {
     const batch = this.afs.firestore.batch();
     const qs = await this.afs.collection(path).ref.get();

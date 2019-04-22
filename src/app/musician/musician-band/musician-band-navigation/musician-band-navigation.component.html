@@ -1,0 +1,7 @@
+<mat-card class="custom action mb-20px" *ngFor="let page of bandPages" [routerLink]="page.path">
+  <mat-card-header>
+    <div mat-card-avatar [class]="page.icon"></div>
+    <mat-card-title>{{page.title}}</mat-card-title>
+    <mat-card-subtitle>{{page.subtitle}}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

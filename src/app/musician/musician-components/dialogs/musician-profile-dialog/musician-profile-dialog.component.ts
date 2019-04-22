@@ -12,10 +12,9 @@ export class MusicianProfileDialogComponent implements OnInit {
   form = this.fb.group({
     id: [],
     name: [null, [Validators.required, Validators.maxLength(100)]],
+    phone: [],
     description: [null, [Validators.minLength(50), Validators.maxLength(500)]],
-    vocalist: [false, Validators.required],
-    instruments: [null, Validators.required],
-    genres: [null, Validators.required]
+    vocalist: [false, Validators.required]
   })
 
   constructor(
@@ -25,7 +24,8 @@ export class MusicianProfileDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.form.patchValue(this.data)
+    console.log('musdata: ', this.data)
+    this.form.patchValue(this.data)
   }
   onCancel() {
     this.dialogRef.close()

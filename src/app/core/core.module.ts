@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarService } from './services/calendar.service';
+import { WindowService } from './services/window.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { UserService } from './services/user.service';
@@ -17,7 +18,7 @@ import { MusicianProfilePipe } from './pipes';
     CommonModule,
     MatSnackBarModule
   ],
-  providers: [AuthService, UserService, MusicianService, BandService, CalendarService, AuthGuard],
+  providers: [WindowService, AuthService, UserService, MusicianService, BandService, CalendarService, AuthGuard],
   exports: [
     UserProfilePipe, TimeAgoPipe, MusicianProfilePipe
   ]

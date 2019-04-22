@@ -1,11 +1,17 @@
-<form [formGroup]="parentForm" *ngIf="musician$ | async as musician">
-  <mat-form-field class="full-width" appearance="outline">
-    <mat-label>{{musician.name}}</mat-label>
+<form [formGroup]="parentForm">
+  <mat-form-field class="full-width mb-20px" appearance="outline">
+    <mat-label>Instrumento de {{musician.name}}</mat-label>
     <mat-select formControlName="instrument">
       <mat-option>- Qual instrumento -</mat-option>
       <mat-option *ngFor="let i of instruments" [value]="i.value">
         {{i.viewValue}}
       </mat-option>
     </mat-select>
+    <mat-hint>Estão listados apenas os cadastrados no perfil do músico.</mat-hint>
+    <mat-error>Instrumento obrigatório</mat-error>
   </mat-form-field>
+  <div class="flex-end mb-20px">
+    <mat-checkbox labelPosition="before" formControlName="active">Membro ativo</mat-checkbox>
+  </div>
+  <pre>{{parentForm.value|json}}</pre>
 </form>
